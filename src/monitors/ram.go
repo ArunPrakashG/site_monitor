@@ -1,4 +1,4 @@
-package main
+package monitor
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"github.com/shirou/gopsutil/mem"
 )
 
-//RAM details in host
+// RAM details in host
 type RAM struct {
 	Free  uint64 `json:"free"`
 	Total uint64 `json:"total"`
