@@ -9,6 +9,7 @@ import (
 
 func HandleAuth(context echo.Context) error {
 	// get username and password from header
+	// TODO: Get details from body
 	username := context.Request().Header.Get("username")
 	password := context.Request().Header.Get("password")
 
