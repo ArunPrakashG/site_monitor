@@ -5,16 +5,21 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/labstack/echo/v4"
+	"github.com/spf13/viper"
 )
 
 func HandleAuth(context echo.Context) error {
-	// get username and password from header
-	// TODO: Get details from body
-	username := context.Request().Header.Get("username")
-	password := context.Request().Header.Get("password")
+	err := context.Request().ParseForm()
+
+	if err != nil {
+		return err
+	}
+
+	username := context.Request().FormValue("username")
+	password := context.Request().FormValue("password")
 
 	// TODO: check username and password against database
-	if username != "" || password != "" {
+	if username != viper.GetString("username") || password != viper.GetString("password") {
 		return context.JSON(http.StatusUnauthorized, map[string]string{
 			"message": "Invalid username or password",
 		})
@@ -29,6 +34,7 @@ func HandleAuth(context echo.Context) error {
 	}
 
 	return context.JSON(http.StatusOK, map[string]string{
-		"token": tokenString,
+		"message": "Login successful",
+		"token":   tokenString,
 	})
 }
