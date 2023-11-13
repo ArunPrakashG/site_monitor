@@ -17,7 +17,7 @@ func Load() (bool, error) {
 	}
 
 	if _, err := os.Stat(runPath + "/" + "credentials.yml"); os.IsNotExist(err) {
-		fmt.Println("Config.yml doesn't exists")
+		fmt.Println("credentials.yml doesn't exists")
 		os.Exit(1)
 		return false, err
 	}
